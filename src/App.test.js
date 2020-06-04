@@ -1,10 +1,10 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./App";
 
 // jest (built into RTL) is our test runner
-// Jest functions here:
-// - test()
+// Jest global functions here:
+// - test() used to run a test
 // - expect()
 // - toBeInTheDocument() (jest-dom)
 
@@ -14,30 +14,54 @@ import App from "./App";
 // a test will fail if any function "throws" an error
 // if no error is thrown, then the test will pass
 
-test("renders the app header", () => {
+test("renders app component without errors", () => {
+  render(<App />);
+  // breakTheTest(true);
+});
+
+test("App renders the form header", () => {
   // arrange
-  const { getByText } = render(<App />); // render returns an object with a bunch of query functions
+  render(<App />);
 
-  // act
-  const header = getByText(/add new animal/i);
+  // Act
+  // query for header
+  const header = screen.getByText(/add new animal/i);
 
-  // assert that the header element is being rendered
-  expect(header).toBeInTheDocument(); // toBeInTheDocument is called an assertion function
+  // assert
+  expect(header).toBeInTheDocument();
 });
 
-test("renders the app header (concise)", () => {
-  // arrange
-  const { getByText } = render(<App />); // render returns an object with a bunch of query functions
+// function breakTheTest(somevalue) {
+//   if (somevalue === true) {
+//   } else {
+//     throw new Error("an error has been thrown");
+//   }
+// }
 
-  // act/assert
-  getByText(/add new animal/i);
+// test("renders the app header", () => {
+//   // arrange
+//   const { getByText } = render(<App />); // render returns an object with a bunch of query functions
 
-  // assert that the header element is being rendered
-  // expect(header).toBeInTheDocument(); // toBeInTheDocument is called an assertion function
-});
+//   // act
+//   const header = getByText(/add new animal/i);
 
-// commments removed
-test("renders the app header (most concise)", () => {
-  const { getByText } = render(<App />);
-  getByText(/add new animal/i);
-});
+//   // assert that the header element is being rendered
+//   expect(header).toBeInTheDocument(); // toBeInTheDocument is called an assertion function
+// });
+
+// test("renders the app header (concise)", () => {
+//   // arrange
+//   const { getByText } = render(<App />); // render returns an object with a bunch of query functions
+
+//   // act/assert
+//   getByText(/add new animal/i);
+
+//   // assert that the header element is being rendered
+//   // expect(header).toBeInTheDocument(); // toBeInTheDocument is called an assertion function
+// });
+
+// // commments removed
+// test("renders the app header (most concise)", () => {
+//   const { getByText } = render(<App />);
+//   getByText(/add new animal/i);
+// });
